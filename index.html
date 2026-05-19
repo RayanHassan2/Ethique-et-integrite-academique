@@ -428,6 +428,26 @@
         document.getElementById("start-screen").style.display = "none";
         document.getElementById("quiz-block").style.display = "block";
     }
+
+    // Fonction pour revenir à la question précédente
+    function prevQuestion() {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            loadQuestion();
+        }
+    }
+
+    // Détection des touches du clavier
+    document.addEventListener("keydown", function(event) {
+        // On vérifie que le quiz est bien en cours (pas sur l'accueil ni sur le score final)
+        if (document.getElementById("quiz-block").style.display === "block") {
+            if (event.key === "ArrowRight") {
+                nextQuestion(); // Flèche droite = question suivante
+            } else if (event.key === "ArrowLeft") {
+                prevQuestion(); // Flèche gauche = question précédente
+            }
+        }
+    });
     
     function initNavBoard() {
         navBoardEl.innerHTML = "";
