@@ -228,12 +228,56 @@
             font-size: 1.1rem;
             cursor: pointer;
         }
+        .start-screen {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .start-screen h2 {
+            color: var(--text-color);
+            margin-bottom: 15px;
+        }
+
+        .start-screen p {
+            font-size: 1.1rem;
+            color: #6c757d;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .start-btn {
+            background-color: var(--correct-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .start-btn:hover {
+            background-color: #218838;
+        }
+
+        /* On masque le quiz au chargement de la page */
+        #quiz-block {
+            display: none;
+        }
     </style>
 </head>
 <body>
 
 <div class="quiz-container">
     <h1>Éthique et Intégrité Académique</h1>
+
+    <div id="start-screen" class="start-screen">
+        <h2>Prêt pour l'entraînement ?</h2>
+        <p>Ce QCM contient les 102 questions de la grille officielle d'EIA. Tu peux naviguer librement entre les questions et voir ton avancement.</p>
+        <button class="start-btn" onclick="startQuiz()">Commencer le QCM</button>
+    </div>
     
     <div id="quiz-block">
         <div class="question-counter">
@@ -379,6 +423,11 @@
     const navBoardEl = document.getElementById("nav-board");
     const quizBlockEl = document.getElementById("quiz-block");
     const scoreBlockEl = document.getElementById("score-block");
+
+    function startQuiz() {
+        document.getElementById("start-screen").style.display = "none";
+        document.getElementById("quiz-block").style.display = "block";
+    }
     
     function initNavBoard() {
         navBoardEl.innerHTML = "";
@@ -508,8 +557,8 @@
     function restartQuiz() {
         currentQuestionIndex = 0;
         userAnswers = new Array(questionsData.length).fill(null);
-        quizBlockEl.style.display = "block";
         scoreBlockEl.style.display = "none";
+        document.getElementById("start-screen").style.display = "block"; // Affiche l'accueil
         loadQuestion();
     }
 
